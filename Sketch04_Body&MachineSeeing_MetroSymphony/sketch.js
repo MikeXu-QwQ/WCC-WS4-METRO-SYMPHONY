@@ -36,7 +36,7 @@ function setup() {
 
   video = createCapture(VIDEO);
   video.size(320, 240);
-  video.hide();
+  //video.hide();
 
   facemesh = ml5.faceMesh(video, modelLoaded);
 
@@ -65,7 +65,7 @@ function setup() {
 }
 
 function modelLoaded() {
-  console.log("FaceMesh ready");///https://docs.ml5js.org/#/reference/facemesh///
+  console.log("FaceMesh ready");
   facemesh.detectStart(video, gotFaces);
 }
 
@@ -88,6 +88,28 @@ function mousePressed() {
 }
 
 function draw() {
+    background(0);
+
+    //START SCREEN
+  if (!started) {
+
+    // subtle breathing effect
+    let pulse = 50 + sin(frameCount * 0.05) * 20;
+
+    fill(0, 0, pulse);
+    textAlign(CENTER, CENTER);
+
+    textSize(36);
+    text("The city is dormant", width / 2, height / 2 - 20);
+
+    textSize(18);
+    text("Press to awaken", width / 2, height / 2 + 30);
+
+    return;
+  }
+
+
+
   console.log(predictions.length);
   background(0, 25);
   blendMode(ADD);
@@ -252,3 +274,6 @@ function drawDot(line, index, size) {
   fill(0, 0, 100);
   ellipse(x, y, size * 0.4, size * 0.4);
 }
+
+
+
